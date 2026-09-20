@@ -1,0 +1,7 @@
+from pathlib import Path
+p = Path('/home/ubuntu/lumin-candles-store/client/src/pages/Home.tsx')
+s = p.read_text()
+needle = '</div><p className="wallet-settings-footnote">'
+flow = '''</div><div className="wallet-flow-grid"><div className="wallet-flow-card"><div className="wallet-form-heading"><CreditCard size={16} /><strong>شحن المحفظة</strong></div><p>أنشئ طلب شحن عبر الوسيلة المحفوظة، ثم تُحدّث المحفظة بعد تأكيد بوابة الدفع.</p><div className="wallet-flow-row"><input type="number" min="1" value={topUpAmount} onChange={(event) => setTopUpAmount(event.target.value)} aria-label="مبلغ الشحن بالريال" /><span>ر.س</span><button onClick={createTopUpIntent} disabled={createTopUpIntentMutation.isPending || !paymentMethodsQuery.data?.length}>{createTopUpIntentMutation.isPending ? "جارٍ..." : "طلب شحن"}</button></div></div><div className="wallet-flow-card"><div className="wallet-form-heading"><Banknote size={16} /><strong>تحويل من المحفظة للبنك</strong></div><p>يُرسل صافي الرصيد إلى الحساب البنكي بعد التوثيق والمراجعة.</p><div className="wallet-flow-row"><input type="number" min="1" value={payoutAmount} onChange={(event) => setPayoutAmount(event.target.value)} aria-label="مبلغ التحويل بالريال" /><span>ر.س</span><button onClick={requestPayout} disabled={requestPayoutMutation.isPending || !bankAccountsQuery.data?.length}>{requestPayoutMutation.isPending ? "جارٍ..." : "طلب تحويل"}</button></div></div></div><p className="wallet-settings-footnote">'''
+if needle not in s: raise SystemExit('wallet settings footnote not found')
+p.write_text(s.replace(needle, flow, 1))

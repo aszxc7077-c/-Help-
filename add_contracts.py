@@ -1,0 +1,8 @@
+from pathlib import Path
+p = Path('/home/ubuntu/lumin-candles-store/client/src/pages/Home.tsx')
+s = p.read_text()
+old = '<div className="provider-benefits"><span><Check size={15} /> وصول لعملاء جدد</span><span><Check size={15} /> تحكم في نطاقك وأسعارك</span><span><Check size={15} /> مدفوعات موثوقة</span></div><button className="dark-button"'
+new = '''<div className="provider-benefits"><span><Check size={15} /> وصول لعملاء جدد</span><span><Check size={15} /> تحكم في نطاقك وأسعارك</span><span><Check size={15} /> مدفوعات موثوقة</span></div><div className="contract-offer"><div className="contract-offer-head"><span>فرص عقود مرنة</span><small>للصيانة والمشاريع والمقاولات</small></div><div className="contract-tabs"><button className={contractTerm === "short" ? "active" : ""} onClick={() => setContractTerm("short")}><Clock3 size={15} /><span><strong>قصير الأمد</strong><small>مهمة أو أسبوع</small></span></button><button className={contractTerm === "long" ? "active" : ""} onClick={() => setContractTerm("long")}><CalendarDays size={15} /><span><strong>طويل الأمد</strong><small>شهري أو سنوي</small></span></button></div><p>{contractTerm === "short" ? "استقبل طلبات صيانة عاجلة، إصلاحات ميدانية، أو دعم مؤقت للمواقع." : "احصل على عقود دورية لصيانة الأساطيل والمعدات وإدارة خدمات مواقع المشاريع."}</p><div className="contract-tags"><span>{contractTerm === "short" ? "استجابة سريعة" : "دخل متكرر"}</span><span>{contractTerm === "short" ? "تسعير لكل مهمة" : "اتفاقية خدمة"}</span><span>تغطية المملكة</span></div></div><button className="dark-button"'''
+if old not in s: raise SystemExit('contract insertion marker not found')
+s = s.replace(old, new, 1)
+p.write_text(s)
